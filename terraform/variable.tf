@@ -32,3 +32,11 @@ variable "repo_url" {
   type        = string
   default     = "https://github.com/alexzhenyul/de_airbnb_project.git"
 }
+
+variable "aws_access_key"{
+  default = "AKIATV7DS2LCJ2W6A46D"
+}
+
+variable "aws_secret_key"{
+  default = "1il84OWvDpBbekOJIi7WfqRsnxZ0Zpf+xAeoH2vb"
+}

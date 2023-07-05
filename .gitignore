@@ -10,6 +10,7 @@ crash.log
 crash.*.log
 *.tfvars
 *.tfvars.json
+terraform/variable.tf
 
 override.tf
 override.tf.json

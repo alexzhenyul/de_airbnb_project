@@ -11,6 +11,8 @@ terraform {
 provider "aws" {
     profile = "default"
     region = "ap-southeast-2"
+    access_key = var.aws_access_key
+    secret_key = var.aws_secret_key
 }
 
 # Create security group for access to EC2 from your Anywhere
@@ -58,17 +60,14 @@ resource "aws_key_pair" "generated_key" {
 
 data "aws_ami" "ubuntu" {
   most_recent = true
-
   filter {
     name   = "name"
     values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20220420"]
   }
-
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-
   owners = ["099720109477"] # Canonical
 }
 
@@ -78,66 +77,21 @@ resource "aws_instance" "airbnb_de_ec2" {
     instance_type   = var.instance_type
     key_name        = aws_key_pair.generated_key.key_name
     security_groups = [aws_security_group.sde_security_group.name]
-    tags {
-        name = "airbnb_ec2"
-    }
 }
+
+
 
 variable "s3_bucket_names" {
   type        = list
-  default     = ["raw_bucket", "stage_bucket", "prod_bucket"]
+  default     = ["raw-bucket-alexl", "stage-bucket-alexl", "prod-bucket-alexl"]
 }
 
 resource "aws_s3_bucket" "airbnb_de_buckets" {
   count         = length(var.s3_bucket_names) //count will be 3
   bucket        = var.s3_bucket_names[count.index]
-  acl           = "private"
-  region        = "ap-southeast-2"
+  #region        = "ap-southeast-2"
   force_destroy = true
 }
-
-
-  user_data = <<EOF
-#!/bin/bash
-
-echo "-------------------------START SETUP---------------------------"
-sudo apt-get -y update
-
-sudo apt-get -y install \
-ca-certificates \
-curl \
-gnupg \
-lsb-release
-
-sudo apt -y install unzip
-
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-sudo apt-get -y update
-sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-sudo chmod 666 /var/run/docker.sock
-
-sudo apt install make
-
-echo 'Clone git repo to EC2'
-cd /home/ubuntu && git clone ${var.repo_url}
-
-echo 'CD to de_airbnb_project directory'
-cd de_airbnb_project
-
-echo 'Start containers & Run db migrations'
-make up
-
-echo "-------------------------END SETUP---------------------------"
-
-EOF
-
-}
-
 
 # EC2 budget constraint
 resource "aws_budgets_budget" "ec2" {
