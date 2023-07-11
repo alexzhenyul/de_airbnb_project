@@ -24,10 +24,10 @@ The following Airbnb activity is included in this Victoria Airbnb dataset for th
 6. Neigborhoods: neighborhood list for geo filter. Sourced from city or open source GIS files;
 
 ### Data modeling 
-![Data Modeling Diagram](PNG\airbnb_er_diagram.png)
+![Data Modeling Diagram](/PNG/airbnb_er_diagram.png)
 
 ### Architecture diagram
-![Architecture diagram](PNG\airbnb - Architecture diagram.png)
+![Architecture diagram](/PNG/airbnb_Architecture_diagram.png)
 
 ### Workflow
 1. Setup data infrastructure (EC2 & s3 Buckets)

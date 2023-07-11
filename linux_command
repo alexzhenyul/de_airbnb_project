@@ -1,4 +1,7 @@
+# Download raw file
+wget http://data.insideairbnb.com/australia/vic/melbourne/2023-06-06/data/listings.csv.gz
+wget http://data.insideairbnb.com/australia/vic/melbourne/2023-06-06/data/calendar.csv.gz
+wget http://data.insideairbnb.com/australia/vic/melbourne/2023-06-06/data/reviews.csv.gz
+
+# Unzip files
 find . -name '*.csv.gz' -print0 | xargs -0 -n1 gzip -d
-find . -name 'listings.csv.gz' -print0 | xargs -0 -n1 gzip -d
-find . -name 'calendar.csv.gz' -print0 | xargs -0 -n1 gzip -d
-find . -name 'reviews.csv.gz' -print0 | xargs -0 -n1 gzip -d
