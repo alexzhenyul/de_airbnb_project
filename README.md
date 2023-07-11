@@ -23,9 +23,11 @@ The following Airbnb activity is included in this Victoria Airbnb dataset for th
 5. Reviews-Summary: summary Review data and Listing ID (to facilitate time based analytics and visualisations linked to a listing);
 6. Neigborhoods: neighborhood list for geo filter. Sourced from city or open source GIS files;
 
-### Data modelling 
+### Data modeling 
+![Data Modeling Diagram](PNG\airbnb_er_diagram.png)
 
 ### Architecture diagram
+![Architecture diagram](PNG\airbnb - Architecture diagram.png)
 
 ### Workflow
 1. Setup data infrastructure (EC2 & s3 Buckets)
@@ -62,7 +64,6 @@ The following Airbnb activity is included in this Victoria Airbnb dataset for th
 * PowerBI: Business intelligence & Visualization
 
 ### Conclusion
-
 
 ### Improvement
 -  Implement kafka via IaC

@@ -1,0 +1,4 @@
+find . -name '*.csv.gz' -print0 | xargs -0 -n1 gzip -d
+find . -name 'listings.csv.gz' -print0 | xargs -0 -n1 gzip -d
+find . -name 'calendar.csv.gz' -print0 | xargs -0 -n1 gzip -d
+find . -name 'reviews.csv.gz' -print0 | xargs -0 -n1 gzip -d
