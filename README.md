@@ -63,7 +63,8 @@ The following Airbnb activity is included in this Victoria Airbnb dataset for th
 * GitHub: Version Control
 * PowerBI: Business intelligence & Visualization
 
-### Conclusion
-
 ### Improvement
 -  Implement kafka via IaC
+-  Refine business requirements (conversion rate, orrcupancy rate)
+-  apply best practise for terrafrom resources
+-  data quality check for compliance and auditing purpose
