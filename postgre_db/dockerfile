@@ -1,0 +1,9 @@
+FROM python:3.9.1
+
+RUN apt-get install wget
+RUN pip install pandas sqlalchemy psycopg2
+
+WORKDIR /de_airbnb_project/python_scripts
+COPY postgre_ingestion.py postgre_ingestion.py 
+
+ENTRYPOINT [ "python", "postgre_ingestion.py" ]
